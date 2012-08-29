@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_ndeftoqrcodetool" default="compile.module.ndeftoqrcodetool">
+  <dirname property="module.ndeftoqrcodetool.basedir" file="${ant.file.module_ndeftoqrcodetool}"/>
+  
+  <property name="module.jdk.home.ndeftoqrcodetool" value="${jdk.home.android_2.3.3_platform}"/>
+  <property name="module.jdk.bin.ndeftoqrcodetool" value="${jdk.bin.android_2.3.3_platform}"/>
+  <property name="module.jdk.classpath.ndeftoqrcodetool" value="jdk.classpath.android_2.3.3_platform"/>
+  
+  <property name="compiler.args.ndeftoqrcodetool" value="${compiler.args}"/>
+  
+  <property name="ndeftoqrcodetool.output.dir" value="${module.ndeftoqrcodetool.basedir}/out/production/NdefToQrcodeTool"/>
+  <property name="ndeftoqrcodetool.testoutput.dir" value="${module.ndeftoqrcodetool.basedir}/out/test/NdefToQrcodeTool"/>
+  
+  <path id="ndeftoqrcodetool.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="ndeftoqrcodetool.module.production.classpath">
+    <path refid="${module.jdk.classpath.ndeftoqrcodetool}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  <path id="ndeftoqrcodetool.runtime.production.module.classpath">
+    <pathelement location="${ndeftoqrcodetool.output.dir}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  <path id="ndeftoqrcodetool.module.classpath">
+    <path refid="${module.jdk.classpath.ndeftoqrcodetool}"/>
+    <pathelement location="${ndeftoqrcodetool.output.dir}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  <path id="ndeftoqrcodetool.runtime.module.classpath">
+    <pathelement location="${ndeftoqrcodetool.testoutput.dir}"/>
+    <pathelement location="${ndeftoqrcodetool.output.dir}"/>
+    <path refid="library.core.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.ndeftoqrcodetool">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.ndeftoqrcodetool">
+    <patternset refid="compiler.excluded"/>
+    <patternset refid="excluded.from.module.ndeftoqrcodetool"/>
+  </patternset>
+  
+  <path id="ndeftoqrcodetool.module.sourcepath">
+    <dirset dir="${module.ndeftoqrcodetool.basedir}">
+      <include name="src"/>
+      <include name="gen"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.ndeftoqrcodetool" depends="compile.module.ndeftoqrcodetool.production,compile.module.ndeftoqrcodetool.tests" description="Compile module NdefToQrcodeTool"/>
+  
+  <target name="compile.module.ndeftoqrcodetool.production" depends="register.custom.compilers" description="Compile module NdefToQrcodeTool; production classes">
+    <mkdir dir="${ndeftoqrcodetool.output.dir}"/>
+    <javac2 destdir="${ndeftoqrcodetool.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.ndeftoqrcodetool}/javac">
+      <compilerarg line="${compiler.args.ndeftoqrcodetool}"/>
+      <bootclasspath refid="ndeftoqrcodetool.module.bootclasspath"/>
+      <classpath refid="ndeftoqrcodetool.module.production.classpath"/>
+      <src refid="ndeftoqrcodetool.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.ndeftoqrcodetool"/>
+    </javac2>
+    
+    <copy todir="${ndeftoqrcodetool.output.dir}">
+      <fileset dir="${module.ndeftoqrcodetool.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.ndeftoqrcodetool"/>
+      </fileset>
+      <fileset dir="${module.ndeftoqrcodetool.basedir}/gen">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+        <patternset refid="excluded.from.compilation.ndeftoqrcodetool"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.ndeftoqrcodetool.tests" depends="register.custom.compilers,compile.module.ndeftoqrcodetool.production" description="compile module NdefToQrcodeTool; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.ndeftoqrcodetool" description="cleanup module">
+    <delete dir="${ndeftoqrcodetool.output.dir}"/>
+    <delete dir="${ndeftoqrcodetool.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NdefToQrcodeTool</string>
+    <string name="tag_scan_text">Please scan the NFC tag.</string>
+    <string name="button_save">Save</string>
+    <string name="button_close">Close</string>
+</resources>
