@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -19,8 +20,10 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Hashtable;
 
 /**
@@ -137,10 +140,20 @@ public class QrcodeViewer extends Activity implements View.OnClickListener {
 
     private void saveQRcode(Bitmap bitmap) {
         Bitmap bmp = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+        String fileName = getPictureDirectory() + "qrcode.jpg";
         try {
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream("qrcode.jpg"));
-        } catch(FileNotFoundException e) {
+            FileOutputStream out = new FileOutputStream(fileName);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getPictureDirectory() {
+        return Environment.getExternalStorageDirectory().getPath() + "NdefToQrcode";
     }
 }
