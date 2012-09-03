@@ -9,6 +9,7 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -37,35 +38,35 @@ public class TagScanActivity extends Activity {
         prefixMap.put((byte) 0x04, "https://");
         prefixMap.put((byte) 0x05, "tel:");
         prefixMap.put((byte) 0x06, "mailto:");
-        prefixMap.put((byte) 0x07, "ftp://anonymous:anonymous@");
-        prefixMap.put((byte) 0x08, "ftp://ftp.");
-        prefixMap.put((byte) 0x09, "ftps://");
-        prefixMap.put((byte) 0x0A, "sftp://");
-        prefixMap.put((byte) 0x0B, "smb://");
-        prefixMap.put((byte) 0x0C, "nfs://");
-        prefixMap.put((byte) 0x0D, "ftp://");
-        prefixMap.put((byte) 0x0E, "dav://");
-        prefixMap.put((byte) 0x0F, "news:");
-        prefixMap.put((byte) 0x10, "telnet://");
-        prefixMap.put((byte) 0x11, "imap:");
-        prefixMap.put((byte) 0x12, "rtsp://");
-        prefixMap.put((byte) 0x13, "urn:");
-        prefixMap.put((byte) 0x14, "pop:");
-        prefixMap.put((byte) 0x15, "sip:");
-        prefixMap.put((byte) 0x16, "sips:");
-        prefixMap.put((byte) 0x17, "tftp:");
-        prefixMap.put((byte) 0x18, "btspp://");
-        prefixMap.put((byte) 0x19, "btl2cap://_");
-        prefixMap.put((byte) 0x1A, "btgoep://");
-        prefixMap.put((byte) 0x1B, "tcpobex://");
-        prefixMap.put((byte) 0x1C, "irdaobex://");
-        prefixMap.put((byte) 0x1D, "file://");
-        prefixMap.put((byte) 0x1E, "urn:epc:id:");
-        prefixMap.put((byte) 0x1F, "urn:epc:tag:");
-        prefixMap.put((byte) 0x20, "urn:epc:pat:");
-        prefixMap.put((byte) 0x21, "urn:epc:raw:");
-        prefixMap.put((byte) 0x22, "urn:epc:");
-        prefixMap.put((byte) 0x23, "urn:nfc:");
+        //prefixMap.put((byte) 0x07, "ftp://anonymous:anonymous@");
+        //prefixMap.put((byte) 0x08, "ftp://ftp.");
+        //prefixMap.put((byte) 0x09, "ftps://");
+        //prefixMap.put((byte) 0x0A, "sftp://");
+        //prefixMap.put((byte) 0x0B, "smb://");
+        //prefixMap.put((byte) 0x0C, "nfs://");
+        //prefixMap.put((byte) 0x0D, "ftp://");
+        //prefixMap.put((byte) 0x0E, "dav://");
+        //prefixMap.put((byte) 0x0F, "news:");
+        //prefixMap.put((byte) 0x10, "telnet://");
+        //prefixMap.put((byte) 0x11, "imap:");
+        //prefixMap.put((byte) 0x12, "rtsp://");
+        //prefixMap.put((byte) 0x13, "urn:");
+        //prefixMap.put((byte) 0x14, "pop:");
+        //prefixMap.put((byte) 0x15, "sip:");
+        //prefixMap.put((byte) 0x16, "sips:");
+        //prefixMap.put((byte) 0x17, "tftp:");
+        //prefixMap.put((byte) 0x18, "btspp://");
+        //prefixMap.put((byte) 0x19, "btl2cap://_");
+        //prefixMap.put((byte) 0x1A, "btgoep://");
+        //prefixMap.put((byte) 0x1B, "tcpobex://");
+        //prefixMap.put((byte) 0x1C, "irdaobex://");
+        //prefixMap.put((byte) 0x1D, "file://");
+        //prefixMap.put((byte) 0x1E, "urn:epc:id:");
+        //prefixMap.put((byte) 0x1F, "urn:epc:tag:");
+        //prefixMap.put((byte) 0x20, "urn:epc:pat:");
+        //prefixMap.put((byte) 0x21, "urn:epc:raw:");
+        //prefixMap.put((byte) 0x22, "urn:epc:");
+        //prefixMap.put((byte) 0x23, "urn:nfc:");
     }
 
     @Override
@@ -88,35 +89,16 @@ public class TagScanActivity extends Activity {
 
         if (!mNfcAdapter.isEnabled()) {
             // NFC機能OFF
-            finish();
+            Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+            startActivity(intent);
             return;
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()), 0);
-        IntentFilter[] intentFilter = new IntentFilter[] {
-                new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED),
-        };
-        String [][] techList = new String[][] {
-                {
-                        //android.nfc.tech.IsoDep.class.getName(),
-                        android.nfc.tech.MifareClassic.class.getName(),
-                        //android.nfc.tech.MifareUltralight.class.getName(),
-                        android.nfc.tech.NfcA.class.getName(),
-                        //android.nfc.tech.NfcB.class.getName(),
-                        //android.nfc.tech.NfcV.class.getName(),
-                        //android.nfc.tech.NfcF.class.getName(),
-                        android.nfc.tech.Ndef.class.getName(),
-                        //android.nfc.tech.NdefFormatable.class.getName(),
-                }
-        };
-        mNfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilter, techList);
-        Log.d(TAG, "ForegroundDispatch() Enable.");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mNfcAdapter.disableForegroundDispatch(this);
     }
 
     @Override

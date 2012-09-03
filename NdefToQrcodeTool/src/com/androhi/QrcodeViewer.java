@@ -154,6 +154,6 @@ public class QrcodeViewer extends Activity implements View.OnClickListener {
     }
 
     private String getPictureDirectory() {
-        return Environment.getExternalStorageDirectory().getPath() + "NdefToQrcode";
+        return getApplication().getFilesDir().getPath();
     }
 }
