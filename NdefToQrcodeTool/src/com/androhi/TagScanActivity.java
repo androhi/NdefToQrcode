@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.XmlResourceParser;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -94,11 +95,17 @@ public class TagScanActivity extends Activity {
             return;
         }
 
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()), 0);
+        IntentFilter[] intentFilters = new IntentFilter[] {
+                new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED),
+        };
+        mNfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilters, Definition.TECH_LIST);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mNfcAdapter.disableForegroundDispatch(this);
     }
 
     @Override
