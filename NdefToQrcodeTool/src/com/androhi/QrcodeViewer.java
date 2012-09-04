@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.DebugUtils;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
@@ -31,6 +34,8 @@ import java.util.Hashtable;
  * To change this template use File | Settings | File Templates.
  */
 public class QrcodeViewer extends Activity implements View.OnClickListener {
+    private static final String TAG = QrcodeViewer.class.getSimpleName();
+
     private ImageView mImageView;
     private TextView mTextView;
     private Button mSaveButton;
@@ -138,9 +143,15 @@ public class QrcodeViewer extends Activity implements View.OnClickListener {
     private void saveQRcode(Bitmap bitmap) {
         Bitmap bmp = bitmap.copy(Bitmap.Config.ARGB_8888, true);
         try {
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream("qrcode.jpg"));
+            String fileName = getSaveDirectory() + "qrcode.jpg";
+            Log.d(TAG, "fileName" + fileName);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(fileName));
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getSaveDirectory() {
+        return getApplication().getFilesDir().getPath();
     }
 }

@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -37,35 +39,35 @@ public class TagScanActivity extends Activity {
         prefixMap.put((byte) 0x04, "https://");
         prefixMap.put((byte) 0x05, "tel:");
         prefixMap.put((byte) 0x06, "mailto:");
-        prefixMap.put((byte) 0x07, "ftp://anonymous:anonymous@");
-        prefixMap.put((byte) 0x08, "ftp://ftp.");
-        prefixMap.put((byte) 0x09, "ftps://");
-        prefixMap.put((byte) 0x0A, "sftp://");
-        prefixMap.put((byte) 0x0B, "smb://");
-        prefixMap.put((byte) 0x0C, "nfs://");
-        prefixMap.put((byte) 0x0D, "ftp://");
-        prefixMap.put((byte) 0x0E, "dav://");
-        prefixMap.put((byte) 0x0F, "news:");
-        prefixMap.put((byte) 0x10, "telnet://");
-        prefixMap.put((byte) 0x11, "imap:");
-        prefixMap.put((byte) 0x12, "rtsp://");
-        prefixMap.put((byte) 0x13, "urn:");
-        prefixMap.put((byte) 0x14, "pop:");
-        prefixMap.put((byte) 0x15, "sip:");
-        prefixMap.put((byte) 0x16, "sips:");
-        prefixMap.put((byte) 0x17, "tftp:");
-        prefixMap.put((byte) 0x18, "btspp://");
-        prefixMap.put((byte) 0x19, "btl2cap://_");
-        prefixMap.put((byte) 0x1A, "btgoep://");
-        prefixMap.put((byte) 0x1B, "tcpobex://");
-        prefixMap.put((byte) 0x1C, "irdaobex://");
-        prefixMap.put((byte) 0x1D, "file://");
-        prefixMap.put((byte) 0x1E, "urn:epc:id:");
-        prefixMap.put((byte) 0x1F, "urn:epc:tag:");
-        prefixMap.put((byte) 0x20, "urn:epc:pat:");
-        prefixMap.put((byte) 0x21, "urn:epc:raw:");
-        prefixMap.put((byte) 0x22, "urn:epc:");
-        prefixMap.put((byte) 0x23, "urn:nfc:");
+        //prefixMap.put((byte) 0x07, "ftp://anonymous:anonymous@");
+        //prefixMap.put((byte) 0x08, "ftp://ftp.");
+        //prefixMap.put((byte) 0x09, "ftps://");
+        //prefixMap.put((byte) 0x0A, "sftp://");
+        //prefixMap.put((byte) 0x0B, "smb://");
+        //prefixMap.put((byte) 0x0C, "nfs://");
+        //prefixMap.put((byte) 0x0D, "ftp://");
+        //prefixMap.put((byte) 0x0E, "dav://");
+        //prefixMap.put((byte) 0x0F, "news:");
+        //prefixMap.put((byte) 0x10, "telnet://");
+        //prefixMap.put((byte) 0x11, "imap:");
+        //prefixMap.put((byte) 0x12, "rtsp://");
+        //prefixMap.put((byte) 0x13, "urn:");
+        //prefixMap.put((byte) 0x14, "pop:");
+        //prefixMap.put((byte) 0x15, "sip:");
+        //prefixMap.put((byte) 0x16, "sips:");
+        //prefixMap.put((byte) 0x17, "tftp:");
+        //prefixMap.put((byte) 0x18, "btspp://");
+        //prefixMap.put((byte) 0x19, "btl2cap://_");
+        //prefixMap.put((byte) 0x1A, "btgoep://");
+        //prefixMap.put((byte) 0x1B, "tcpobex://");
+        //prefixMap.put((byte) 0x1C, "irdaobex://");
+        //prefixMap.put((byte) 0x1D, "file://");
+        //prefixMap.put((byte) 0x1E, "urn:epc:id:");
+        //prefixMap.put((byte) 0x1F, "urn:epc:tag:");
+        //prefixMap.put((byte) 0x20, "urn:epc:pat:");
+        //prefixMap.put((byte) 0x21, "urn:epc:raw:");
+        //prefixMap.put((byte) 0x22, "urn:epc:");
+        //prefixMap.put((byte) 0x23, "urn:nfc:");
     }
 
     @Override
@@ -117,6 +119,17 @@ public class TagScanActivity extends Activity {
     public void onPause() {
         super.onPause();
         mNfcAdapter.disableForegroundDispatch(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, "QRcode List");
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
     }
 
     @Override
