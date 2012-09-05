@@ -74,10 +74,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TagScanActivityTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TagScanActivityTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NdefToQrcodeTest/src/com/androhi/TagScanActivityTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="50" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.81017613">
+            <state line="34" column="50" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -85,10 +85,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TagScanActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/androhi/TagScanActivity.java">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="96" column="15" selection-start="3463" selection-end="3463" vertical-scroll-proportion="0.0">
+            <state line="25" column="0" selection-start="977" selection-end="977" vertical-scroll-proportion="0.7338552">
               <folding />
             </state>
           </provider>
@@ -116,10 +116,10 @@
         <option value="$PROJECT_DIR$/src/com/androhi/CustomProgressDialog.java" />
         <option value="$PROJECT_DIR$/src/com/androhi/SaveQrcodeTask.java" />
         <option value="$PROJECT_DIR$/src/com/androhi/QrcodeViewer.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/androhi/TagScanActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/NdefToQrcodeTest/src/com/androhi/TagScanActivityTest.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
       </list>
     </option>
   </component>
@@ -277,6 +277,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NdefToQrcodeTool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NdefToQrcodeTool" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="NdefToQrcodeTest" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -354,7 +368,7 @@
       <recent name="C:\Users\Shimokawa\IdeaProjects\NdefToQrcode\NdefToQrcodeTool\res\layout" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Tests.NdefToQrcodeTest">
+  <component name="RunManager" selected="Android Application.NdefToQrcodeTool">
     <configuration default="false" name="TagScanActivityTest" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="NdefToQrcodeTest" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -750,13 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="39" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/code_viewer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="48" selection-start="421" selection-end="421" vertical-scroll-proportion="0.0">
@@ -802,17 +809,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/androhi/TagScanActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="15" selection-start="3463" selection-end="3463" vertical-scroll-proportion="0.0">
+        <state line="96" column="15" selection-start="3463" selection-end="3463" vertical-scroll-proportion="2.2896283">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NdefToQrcodeTest/src/com/androhi/TagScanActivityTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="50" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.81017613">
+        <state line="34" column="50" selection-start="1083" selection-end="1083" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="977" selection-end="977" vertical-scroll-proportion="0.7338552">
+          <folding />
         </state>
       </provider>
     </entry>
