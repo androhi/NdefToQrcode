@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.XmlResourceParser;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -90,29 +92,16 @@ public class TagScanActivity extends Activity {
 
         if (!mNfcAdapter.isEnabled()) {
             // NFC機能OFF
-            finish();
+            Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+            startActivity(intent);
             return;
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()), 0);
-        IntentFilter[] intentFilter = new IntentFilter[] {
+        IntentFilter[] intentFilters = new IntentFilter[] {
                 new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED),
         };
-        String [][] techList = new String[][] {
-                {
-                        //android.nfc.tech.IsoDep.class.getName(),
-                        android.nfc.tech.MifareClassic.class.getName(),
-                        //android.nfc.tech.MifareUltralight.class.getName(),
-                        android.nfc.tech.NfcA.class.getName(),
-                        //android.nfc.tech.NfcB.class.getName(),
-                        //android.nfc.tech.NfcV.class.getName(),
-                        //android.nfc.tech.NfcF.class.getName(),
-                        android.nfc.tech.Ndef.class.getName(),
-                        //android.nfc.tech.NdefFormatable.class.getName(),
-                }
-        };
-        mNfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilter, techList);
-        Log.d(TAG, "ForegroundDispatch() Enable.");
+        mNfcAdapter.enableForegroundDispatch(this, pendingIntent, intentFilters, Definition.TECH_LIST);
     }
 
     @Override

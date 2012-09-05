@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+<<<<<<< HEAD
 import android.util.DebugUtils;
+=======
+>>>>>>> sonic
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -22,8 +26,10 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Hashtable;
 
 /**
@@ -71,25 +77,17 @@ public class QrcodeViewer extends Activity implements View.OnClickListener {
                 qrcodeSize = displayHeight;
             }
 
-            try {
-                //TODO:ここはAsyncTaskに分けてProgressBar出そう
-                mBitmap = createQRCodeByZxing(mUrl, qrcodeSize);
-                if(mBitmap != null) {
-                    mImageView.setImageBitmap(mBitmap);
-                    mTextView.setText(mUrl);
-                    mSaveButton.setEnabled(true);
-                }
-            } catch(WriterException e) {
-                e.printStackTrace();
-            }
-
+            // QRコード生成
+            SaveQrcodeTask task = new SaveQrcodeTask(this, qrcodeSize);
+            task.execute(mUrl);
         }
     }
 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.save:
-                saveQRcode(mBitmap);
+                saveQRcode();
+                finish();
                 break;
             case R.id.close:
                 finish();
@@ -99,56 +97,31 @@ public class QrcodeViewer extends Activity implements View.OnClickListener {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public Bitmap createQRCodeByZxing(String contents, int size) throws WriterException {
-        // QRコードをエンコードするクラス
-        QRCodeWriter qrWriter = new QRCodeWriter();
-
-        // 異なる型の値を入れるためgenericは使えない
-        @SuppressWarnings("rawtypes")
-        Hashtable encodeHint = new Hashtable();
-
-        // 日本語を扱うためにShift-JISを指定
-        encodeHint.put(EncodeHintType.CHARACTER_SET, "shiftjis");
-
-        /*
-           * エラー修復レベルを指定
-           * L  7%が復元可能
-           * M 15%が復元可能
-           * Q 25%が復元可能
-           * H 30%が復元可能
-           */
-        encodeHint.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-
-        BitMatrix qrCodeData = qrWriter.encode(contents, BarcodeFormat.QR_CODE, size, size, encodeHint);
-
-        // QRコードのbitmap画像を生成
-        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-        bitmap.eraseColor(Color.argb(255, 255, 255, 255));
-        for(int x = 0; x < qrCodeData.getWidth(); x++) {
-            for(int y = 0; y < qrCodeData.getHeight(); y++) {
-                if(qrCodeData.get(x, y)) {
-                    // trueはBlack
-                    bitmap.setPixel(x, y, Color.BLACK);
-                } else {
-                    // falseはWhite
-                    bitmap.setPixel(x, y, Color.WHITE);
-                }
-            }
-        }
-
-        return bitmap;
-    }
-
-    private void saveQRcode(Bitmap bitmap) {
-        Bitmap bmp = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+    private void saveQRcode() {
+        BitmapDrawable bitmapDrawable = (BitmapDrawable)mImageView.getDrawable();
+        Bitmap bmp = bitmapDrawable.getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+        String fileName = getPictureDirectory() + "/qrcode.jpg";
+        Log.w(TAG, "fileName:" + fileName);
         try {
-            String fileName = getSaveDirectory() + "qrcode.jpg";
-            Log.d(TAG, "fileName" + fileName);
-            bmp.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(fileName));
-        } catch(FileNotFoundException e) {
+            FileOutputStream out = new FileOutputStream(fileName);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getPictureDirectory() {
+        String storagePath = Environment.getExternalStorageDirectory().getPath() + "/" + getString(R.string.app_name);
+        File appDir = new File(storagePath);
+        Log.d(TAG, "appDir:" + appDir.getPath() + "(" + appDir.exists() + ")");
+        if (!appDir.exists()) {
+            appDir.mkdirs();
+        }
+        return storagePath;
     }
 
     private String getSaveDirectory() {
