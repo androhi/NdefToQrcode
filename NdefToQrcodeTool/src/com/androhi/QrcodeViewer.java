@@ -8,10 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Environment;
-<<<<<<< HEAD
-import android.util.DebugUtils;
-=======
->>>>>>> sonic
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -124,7 +120,4 @@ public class QrcodeViewer extends Activity implements View.OnClickListener {
         return storagePath;
     }
 
-    private String getSaveDirectory() {
-        return getApplication().getFilesDir().getPath();
-    }
 }
