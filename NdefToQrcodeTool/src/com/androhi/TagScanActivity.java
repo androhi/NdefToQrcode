@@ -114,7 +114,6 @@ public class TagScanActivity extends Activity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        Log.d(TAG, "start onNewIntent()");
         String action = intent.getAction();
         if (TextUtils.isEmpty(action)) {
             // action属性がない
@@ -137,11 +136,9 @@ public class TagScanActivity extends Activity {
             NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, empty, empty);
             message = new NdefMessage(new NdefRecord[] {record});
         }
-        Log.d(TAG, "NdefMessage : " + message);
 
         try {
             String url = getUrl(message);
-            Log.d(TAG, "getUrl() : " + url);
             Intent viewerIntent = new Intent(TagScanActivity.this, QrcodeViewer.class);
             viewerIntent.putExtra("URL", url);
             startActivity(viewerIntent);

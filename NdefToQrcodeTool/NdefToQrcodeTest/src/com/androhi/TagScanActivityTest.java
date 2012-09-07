@@ -1,6 +1,8 @@
 package com.androhi;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
 
 /**
@@ -19,7 +21,7 @@ public class TagScanActivityTest extends ActivityInstrumentationTestCase2<TagSca
     private String resourceString;
 
     public TagScanActivityTest() {
-        super("com.androhi", TagScanActivity.class);
+        super(TagScanActivity.class);
     }
 
     /**
@@ -39,6 +41,7 @@ public class TagScanActivityTest extends ActivityInstrumentationTestCase2<TagSca
     /**
      * 初期条件テスト
      */
+    @SmallTest
     public void testPreConditions() {
         assertNotNull(mTextView);
     }
@@ -46,6 +49,7 @@ public class TagScanActivityTest extends ActivityInstrumentationTestCase2<TagSca
     /**
      * UIテスト
      */
+    @MediumTest
     public void testUI() {
         assertEquals(resourceString, (String)mTextView.getText());
     }
