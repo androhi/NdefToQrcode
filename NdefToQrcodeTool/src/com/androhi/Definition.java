@@ -21,5 +21,14 @@ public class Definition {
                     android.nfc.tech.NfcA.class.getName(),
                     android.nfc.tech.Ndef.class.getName()
             },
+            // NTAG203
+            {
+                    android.nfc.tech.NfcA.class.getName(),
+                    android.nfc.tech.Ndef.class.getName()
+            },
+            {
+                    android.nfc.tech.NfcB.class.getName(),
+                    android.nfc.tech.Ndef.class.getName()
+            },
     };
 }
