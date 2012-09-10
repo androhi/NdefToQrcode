@@ -13,8 +13,12 @@ import android.os.Parcelable;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import net.nend.android.NendAdView;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -76,6 +80,12 @@ public class TagScanActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        NendAdView nendAdView = new NendAdView(getApplicationContext(),
+                                        Definition.NEND_SPOT_ID, Definition.NEND_API_KEY);
+        addContentView(nendAdView, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                                        ViewGroup.LayoutParams.MATCH_PARENT));
+        nendAdView.setGravity(Gravity.BOTTOM|Gravity.CENTER);
     }
 
     @Override

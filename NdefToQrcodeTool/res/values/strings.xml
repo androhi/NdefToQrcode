@@ -4,4 +4,7 @@
     <string name="tag_scan_text">Please scan the NFC tag.</string>
     <string name="button_save">Save</string>
     <string name="button_close">Close</string>
+
+    <string name="menu_save">Save</string>
+    <string name="menu_share">Share</string>
 </resources>

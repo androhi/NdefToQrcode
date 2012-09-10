@@ -31,4 +31,9 @@ public class Definition {
                     android.nfc.tech.Ndef.class.getName()
             },
     };
+
+    // nend用定数
+    public static final int NEND_SPOT_ID = 18914;
+    public static final String NEND_API_KEY = "1f9fc0db64e3b7a9a579531e56ae642348756fc0";
+
 }

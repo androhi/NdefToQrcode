@@ -32,29 +32,27 @@ import java.util.Hashtable;
 public class SaveQrcodeTask extends AsyncTask<String, Void, String> {
     private static final String TAG = SaveQrcodeTask.class.getSimpleName();
 
-    private Activity mActivity;
+    private QrcodeViewer mQrcodeViewer;
     private CustomProgressDialog mProgressDialog;
     private int mQrcodeSize;
     private Bitmap mBitmap;
     private ImageView mImageView;
     private TextView mTextView;
-    private Button mSaveButton;
 
-    public SaveQrcodeTask(Activity activity, int size) {
-        mActivity = activity;
+    public SaveQrcodeTask(QrcodeViewer activity, int size) {
+        mQrcodeViewer = activity;
         mQrcodeSize = size;
     }
 
     protected void onPreExecute() {
         super.onPreExecute();
         // プログレスバー設定
-        mProgressDialog = new CustomProgressDialog(mActivity);
+        mProgressDialog = new CustomProgressDialog(mQrcodeViewer);
         mProgressDialog.setCancelable(false);
         mProgressDialog.show();
 
-        mImageView = (ImageView)mActivity.findViewById(R.id.qrcode);
-        mTextView = (TextView)mActivity.findViewById(R.id.text);
-        mSaveButton = (Button)mActivity.findViewById(R.id.save);
+        mImageView = (ImageView)mQrcodeViewer.findViewById(R.id.qrcode);
+        mTextView = (TextView)mQrcodeViewer.findViewById(R.id.text);
     }
 
     protected String doInBackground(String... urls) {
@@ -71,7 +69,8 @@ public class SaveQrcodeTask extends AsyncTask<String, Void, String> {
         if(mBitmap != null) {
             mImageView.setImageBitmap(mBitmap);
             mTextView.setText(url);
-            mSaveButton.setEnabled(true);
+            mQrcodeViewer.saveQRcode(mBitmap);
+            mQrcodeViewer.doShare();
         }
         mProgressDialog.dismiss();
     }
